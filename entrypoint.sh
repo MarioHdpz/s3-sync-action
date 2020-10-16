@@ -2,10 +2,14 @@
 
 set -e
 
-if [ -z "$AWS_S3_BUCKET" ]; then
-  echo "AWS_S3_BUCKET is not set. Quitting."
+if [ -z "$AWS_S3_BUCKET_PREFIX" ]; then
+  echo "AWS_S3_BUCKET_PREFIX is not set. Quitting."
   exit 1
 fi
+
+# Get project from version v0.0.0-<project>
+$PROJECT=$(echo $GITHUB_REF | sed -e 's/.*-//')
+$AWS_S3_BUCKET="${AWS_S3_BUCKET_PREFIX}-${PROJECT}"
 
 if [ -z "$AWS_ACCESS_KEY_ID" ]; then
   echo "AWS_ACCESS_KEY_ID is not set. Quitting."
