@@ -8,8 +8,8 @@ if [ -z "$AWS_S3_BUCKET_PREFIX" ]; then
 fi
 
 # Get project from version v0.0.0-<project>
-$PROJECT=$(echo $GITHUB_REF | sed -e 's/.*-//')
-$AWS_S3_BUCKET="${AWS_S3_BUCKET_PREFIX}-${PROJECT}"
+PROJECT=$(echo $GITHUB_REF | sed -e 's/.*-//')
+AWS_S3_BUCKET="${AWS_S3_BUCKET_PREFIX}-${PROJECT}"
 
 if [ -z "$AWS_ACCESS_KEY_ID" ]; then
   echo "AWS_ACCESS_KEY_ID is not set. Quitting."
